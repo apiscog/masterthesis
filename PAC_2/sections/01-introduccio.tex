@@ -10,12 +10,13 @@ tasques, la política de planificació condiciona qui espera, durant quant temps
 amb quin aprofitament dels recursos.
 
 Aquest estat de l'art estudia els conceptes necessaris per dissenyar una
-plataforma web que simuli aquest problema amb dades sintètiques. La revisió se
-centra en quatre qüestions: les polítiques que decideixen quina tasca s'executa,
-les mètriques que permeten comparar-les, la metodologia d'una simulació
-reproduïble i les eines existents que resolen problemes relacionats. L'objectiu
-no és demostrar que una política sigui superior, sinó delimitar com es pot
-avaluar sota diferents condicions de càrrega.
+plataforma web que permeti representar aquest problema amb dades sintètiques.
+La revisió se centra en quatre qüestions: les polítiques que decideixen quina
+tasca s'executa, les mètriques que permeten comparar-les, el mecanisme
+experimental necessari per obtenir resultats reproduïbles i les eines existents
+que resolen problemes relacionats. L'objectiu no és demostrar que una política
+sigui superior, sinó delimitar com es pot avaluar sota diferents condicions de
+càrrega.
 
 La literatura sobre planificació inclou processadors, xarxes, fabricació,
 computació d'altes prestacions i infraestructures cloud. Aquests dominis no són
@@ -27,7 +28,8 @@ selecció automàtica de polítiques mitjançant aprenentatge automàtic.
 
 També cal separar les cues operatives dels entorns experimentals. BullMQ o
 RabbitMQ executen treball real i incorporen restriccions de persistència,
-consum, relliurament i concurrència. GridSim, CloudSim o SimGrid modelen
-sistemes per experimentar sense desplegar tota la infraestructura. El TFM se
-situa en aquest segon grup, amb un abast més reduït i una interfície orientada a
-configurar i interpretar comparacions de polítiques de tasques asíncrones.
+consum, relliurament i concurrència. En el TFM, en canvi, la simulació serà un
+mecanisme intern per comparar polítiques sense esperar el temps real. El
+resultat principal serà una plataforma web per definir escenaris, iniciar
+comparacions i interpretar-ne les mètriques. El motor donarà suport a aquest
+flux, però no substituirà el disseny i el desenvolupament de l'aplicació web.
