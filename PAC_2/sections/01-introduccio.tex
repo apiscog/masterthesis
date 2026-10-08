@@ -1,0 +1,33 @@
+\section{Introducció i delimitació}
+
+Les aplicacions web executen sovint operacions que no cal completar dins del
+cicle immediat d'una petició. La generació d'un document, l'enviament d'una
+comunicació, l'actualització d'un índex o el càlcul d'un informe es poden
+representar com a tasques en segon pla. Aquest desacoblament evita mantenir
+l'usuari esperant, però introdueix un sistema format per productors, cues i
+processos de treball que comparteixen una capacitat limitada. Quan s'acumulen
+tasques, la política de planificació condiciona qui espera, durant quant temps i
+amb quin aprofitament dels recursos.
+
+Aquest estat de l'art estudia els conceptes necessaris per dissenyar una
+plataforma web que simuli aquest problema amb dades sintètiques. La revisió se
+centra en quatre qüestions: les polítiques que decideixen quina tasca s'executa,
+les mètriques que permeten comparar-les, la metodologia d'una simulació
+reproduïble i les eines existents que resolen problemes relacionats. L'objectiu
+no és demostrar que una política sigui superior, sinó delimitar com es pot
+avaluar sota diferents condicions de càrrega.
+
+La literatura sobre planificació inclou processadors, xarxes, fabricació,
+computació d'altes prestacions i infraestructures cloud. Aquests dominis no són
+equivalents a una cua de tasques backend. Per això només es recullen resultats
+externs quan aporten un concepte transferible, com la inanició, l'equitat,
+l'envelliment o el disseny d'experiments. Queden fora els planificadors de temps
+real amb garanties estrictes, els workflows amb dependències complexes i la
+selecció automàtica de polítiques mitjançant aprenentatge automàtic.
+
+També cal separar les cues operatives dels entorns experimentals. BullMQ o
+RabbitMQ executen treball real i incorporen restriccions de persistència,
+consum, relliurament i concurrència. GridSim, CloudSim o SimGrid modelen
+sistemes per experimentar sense desplegar tota la infraestructura. El TFM se
+situa en aquest segon grup, amb un abast més reduït i una interfície orientada a
+configurar i interpretar comparacions de polítiques de tasques asíncrones.

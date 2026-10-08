@@ -1,0 +1,28 @@
+\section{Síntesi i posicionament del TFM}
+
+La revisió mostra que els components conceptuals del projecte estan establerts,
+però apareixen dispersos. La teoria de cues aporta mètriques i criteris
+d'equitat; els estudis de planificació descriuen els compromisos entre prioritat
+i espera; els marcs de simulació faciliten repetir experiments; i els brokers
+mostren les restriccions d'una implementació real. La contribució prevista no
+substitueix aquestes línies, sinó que n'integra una part concreta en un prototip
+web coherent.
+
+El motor representarà tasques asíncrones no preemptives, workers limitats i un
+rellotge virtual. Les polítiques s'implementaran darrere d'una interfície comuna
+per executar FIFO, prioritat estricta i prioritat amb envelliment sobre la
+mateixa entrada. La persistència conservarà els resultats i les dades necessàries
+per reproduir-los. La interfície permetrà preparar escenaris i comparar
+mètriques sense inspeccionar logs o taules internes.
+
+Aquest posicionament és més reduït que GridSim, CloudSim o SimGrid de manera
+intencionada. No es modelaran topologies de xarxa, màquines virtuals ni
+negociació de recursos, ni es reproduiran totes les garanties d'un broker.
+L'objectiu és fer visible la relació entre càrrega, política i espera amb un
+model comprensible i verificable.
+
+La plataforma s'adreça principalment a estudiants i professionals de backend
+que vulguin explorar una decisió abans d'aplicar-la a un sistema real. Una
+simulació sintètica pot revelar comportaments, detectar riscos i comparar
+alternatives dins del model, però no pot garantir l'efecte d'una política sobre
+una organització sense calibrar-la amb dades representatives.

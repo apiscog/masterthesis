@@ -1,0 +1,42 @@
+\section{Simulació de sistemes de cues i planificació}
+
+La simulació d'esdeveniments discrets representa un sistema mitjançant canvis
+d'estat que tenen lloc en instants concrets. Entre dos esdeveniments consecutius
+no és necessari avançar el rellotge pas a pas. En aquest cas, els esdeveniments
+principals són l'arribada, l'inici i la finalització d'una tasca, i eventualment
+la fallada o el reintent. Una cua d'esdeveniments futurs permet avançar al
+següent instant rellevant \parencite{banks2010des,simpyTime}.
+
+Aquest enfocament evita que un experiment depengui del temps real. Una tasca de
+durada simulada de deu minuts es pot resoldre immediatament i repetir amb una
+altra política. GridSim aplica aquesta idea per estudiar recursos heterogenis i
+algorismes de planificació en condicions controlades \parencite{buyya2002gridsim}.
+CloudSim argumenta igualment que una infraestructura real dificulta repetir
+experiments perquè la demanda, la disponibilitat i els recursos varien fora del
+control de l'investigador \parencite{calheiros2011cloudsim}.
+
+La comparació requereix que cada política rebi la mateixa llista de tasques,
+amb les mateixes arribades, durades, prioritats i recursos. Quan les entrades
+són aleatòries, s'ha de conservar la llavor i repetir els experiments. Law
+recomana comparar configuracions sota condicions experimentals semblants perquè
+les diferències es puguin atribuir a les alternatives i no a la variació de les
+entrades \parencite{law2015simulation}.
+
+Cal distingir verificació i validació. La verificació comprova que el programa
+implementa correctament el model; la validació valora si el model és adequat
+per al propòsit i el domini declarats. Sargent remarca que un model pot ser
+vàlid sota unes condicions i no sota unes altres \parencite{sargent2007verification}.
+Per verificar el motor es poden preparar casos petits amb resultats calculables,
+revisar traces, comprovar invariants i provar condicions extremes. Cap tasca no
+pot començar abans d'arribar i un worker no pot executar dues tasques alhora.
+
+La validació externa és més limitada perquè el TFM no modela una empresa real.
+Les dades sintètiques permeten comprovar consistència i explorar comportaments,
+però no garanteixen una millora en producció. Aquesta limitació s'ha de
+conservar tant en el disseny com en les conclusions.
+
+La reproducció tampoc consisteix només a publicar codi. Les directrius STRESS
+organitzen la descripció en objectius, lògica, dades, experimentació,
+implementació i accés al codi \parencite{monks2019stress}. Cada execució haurà
+de conservar l'escenari, la política, els paràmetres, la llavor, la versió del
+model i les mètriques.

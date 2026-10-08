@@ -1,0 +1,39 @@
+\section{Processament asíncron i cues de treball}
+
+Una cua de treball separa la producció d'una tasca de la seva execució. El
+productor crea una unitat de treball amb les dades necessàries i la cua la manté
+fins que un worker disposa de capacitat per processar-la. Aquest esquema permet
+regular pics de demanda, distribuir feina entre diversos processos i tractar
+fallades sense bloquejar necessàriament la petició que ha originat la tasca. El
+model bàsic es pot descriure amb l'instant d'arribada, la durada del servei, la
+prioritat, l'estat i el worker assignat a cada tasca.
+
+FIFO (\emph{first in, first out}) és la disciplina de partida més directa: les
+tasques es retiren segons l'ordre d'arribada. Tanmateix, l'ordre que observa
+l'aplicació no sempre coincideix amb una seqüència FIFO perfecta. En una cua
+operativa hi poden intervenir diversos consumidors, tasques lliurades però no
+confirmades, reintents o prioritats. RabbitMQ documenta que aquests factors
+poden modificar l'ordre efectiu de lliurament \parencite{rabbitmqPriority}. Una
+simulació ha de declarar quins efectes representa i quins simplifica.
+
+BullMQ mostra una implementació del mateix problema en l'ecosistema Node.js.
+Les tasques prioritzades s'ordenen pel valor assignat i conserven FIFO dins del
+mateix nivell; la inserció prioritzada té un cost logarítmic respecte del nombre
+de tasques del conjunt ordenat \parencite{bullmqPrioritized}. Aquest detall és
+rellevant per entendre una eina real, però no determina el resultat del
+simulador: el TFM compararà les conseqüències de cada política sobre la càrrega
+modelada, no el rendiment intern d'una biblioteca concreta.
+
+La concurrència obliga a precisar el moment de la decisió. En un model no
+preemptiu, una tasca que ja s'està executant manté el worker fins que finalitza;
+la política només escull entre les tasques pendents quan queda capacitat lliure.
+Amb diversos workers, dues tasques consecutives poden acabar en un ordre
+diferent si tenen durades diferents. L'ordre de selecció, l'ordre d'inici i
+l'ordre de finalització són, per tant, conceptes separats.
+
+La plataforma treballarà amb una abstracció més simple que un broker productiu.
+No reproduirà protocols de confirmació, replicació ni persistència distribuïda.
+Representarà els elements que afecten directament la pregunta experimental:
+arribades, durades, prioritats, workers i, si entra dins de l'abast final,
+fallades i reintents. Aquesta delimitació permet atribuir els canvis observats
+a la política en lloc de barrejar-los amb decisions d'infraestructura.

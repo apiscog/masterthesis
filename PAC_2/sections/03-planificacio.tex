@@ -1,0 +1,62 @@
+\section{Fonaments de planificació de tasques}
+
+La planificació decideix quina tasca pendent rep el recurs disponible. En el
+model del TFM la decisió és dinàmica, perquè poden arribar tasques mentre altres
+s'executen, i en línia, perquè només es coneix l'estat disponible en cada
+instant. La política no crea capacitat: modifica com es distribueix l'espera
+entre tasques i classes.
+
+\subsection{FIFO}
+
+FIFO tracta l'antiguitat d'arribada com a únic criteri. És fàcil d'explicar,
+implementa un desempat estable i serveix com a línia base. El seu límit apareix
+quan una tasca urgent arriba darrere d'un conjunt ampli de treballs o quan una
+tasca llarga ocupa el primer lloc. Tot i això, no s'ha de descriure FIFO com una
+política formalment justa sense indicar quina definició d'equitat s'utilitza.
+
+\subsection{Prioritat estricta}
+
+La prioritat estricta selecciona primer la tasca amb la prioritat més alta i
+utilitza habitualment FIFO per desempatar. Permet donar una resposta preferent
+a una classe urgent, però una arribada sostinguda de tasques d'alta prioritat
+pot ajornar indefinidament les de nivell inferior. RabbitMQ tracta aquest risc
+d'inanició i mostra que el comportament concret depèn del tipus de cua i de la
+implementació \parencite{rabbitmqPriority}.
+
+La càrrega és decisiva. Wierman i Harchol-Balter mostren que el comportament
+d'equitat d'una disciplina pot variar segons la càrrega i la distribució dels
+temps de servei \parencite{wierman2003unfairness}. Wierman també assenyala que
+l'estudi tradicional del temps de resposta, la longitud de cua i el throughput
+s'ha de complementar amb alguna noció d'equitat \parencite{wierman2011fairness}.
+Encara que els models no coincideixen exactament amb el TFM, justifiquen provar
+diversos nivells de saturació i observar els resultats per classes.
+
+\subsection{Prioritat amb envelliment}
+
+L'envelliment modifica la prioritat efectiva en funció del temps acumulat a la
+cua. Una tasca de prioritat baixa pot ascendir gradualment fins a competir amb
+tasques inicialment més urgents. El mecanisme necessita concretar una fórmula,
+un interval o un llindar de promoció; aquesta elecció forma part del model.
+
+Becker i Schüle avaluen un mecanisme adaptatiu d'envelliment combinat amb sis
+algorismes dinàmics. Els seus experiments redueixen l'espera de treballs de
+prioritat baixa i milloren el makespan mitjà en part dels casos, però també
+augmenten l'espera de treballs prioritaris i cap algorisme domina totes les
+proves \parencite{becker2020aging}. El domini és una arquitectura heterogènia,
+de manera que els valors no es poden extrapolar. La conclusió transferible és
+que l'envelliment introdueix un compromís que cal mesurar.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Síntesi de les polítiques previstes}
+  \label{tab:politiques}
+  \begin{tabularx}{\textwidth}{@{}p{2.4cm}X X X@{}}
+    \toprule
+    Política & Criteri & Avantatge a contrastar & Risc principal \\
+    \midrule
+    FIFO & Ordre d'arribada & Simplicitat i línia base estable & Bloqueig de cap de línia \\
+    Prioritat estricta & Prioritat inicial; FIFO en empat & Resposta preferent per a tasques urgents & Inanició de prioritats baixes \\
+    Prioritat amb envelliment & Prioritat inicial i espera acumulada & Reducció d'esperes extremes & Sensibilitat a la fórmula i penalització de classes altes \\
+    \bottomrule
+  \end{tabularx}
+\end{table}

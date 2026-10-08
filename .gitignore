@@ -1,0 +1,72 @@
+# Por defecto, no versionar ningun archivo. Los directorios se mantienen
+# visibles para que Git pueda localizar las excepciones permitidas.
+*
+!*/
+
+# Archivos basicos del repositorio.
+!/.gitignore
+!/README.md
+
+# Configuracion compartida de compilacion en VS Code.
+!/.vscode/
+/.vscode/*
+!/.vscode/settings.json
+
+# Fuentes y configuracion LaTeX.
+!/PAC_*/**/*.tex
+!/PAC_*/**/*.bib
+!/PAC_*/**/*.sty
+!/PAC_*/**/*.cls
+!/PAC_*/**/*.bst
+!/PAC_*/**/*.bbx
+!/PAC_*/**/*.cbx
+!/PAC_*/**/*.lbx
+!/PAC_*/**/latexmkrc
+!/PAC_*/**/.latexmkrc
+
+# Recursos graficos que pueden formar parte del documento.
+!/PAC_*/**/*.png
+!/PAC_*/**/*.jpg
+!/PAC_*/**/*.jpeg
+!/PAC_*/**/*.svg
+!/PAC_*/**/*.eps
+
+# Documentacion propia de cada proyecto LaTeX.
+!/PAC_*/README.md
+
+# Nunca versionar directorios ni artefactos generados por la compilacion.
+**/build/
+**/out/
+**/_minted-*/
+**/*.aux
+**/*.bbl
+**/*.bcf
+**/*.blg
+**/*.fdb_latexmk
+**/*.fls
+**/*.lof
+**/*.log
+**/*.lot
+**/*.nav
+**/*.out
+**/*.run.xml
+**/*.snm
+**/*.synctex.gz
+**/*.toc
+**/*.xdv
+**/*.dvi
+**/*.ps
+**/*.pdf
+
+# Un PDF dentro de assets puede ser una figura fuente, no una compilacion.
+!/PAC_*/**/assets/**/*.pdf
+
+# Temporales de editores y del sistema operativo.
+**/*.bak
+**/*.tmp
+**/*.swp
+**/*.swo
+**/*~
+**/.DS_Store
+**/Thumbs.db
+**/desktop.ini

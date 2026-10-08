@@ -1,0 +1,55 @@
+\section{Solucions i eines existents}
+
+Les propostes revisades es poden agrupar en simuladors acadèmics, biblioteques
+generals de simulació i cues operatives. GridSim modela recursos Grid, usuaris
+i aplicacions, i permet estudiar algorismes d'assignació sota recursos
+heterogenis \parencite{buyya2002gridsim}. CloudSim trasllada aquest enfocament
+a centres de dades, màquines virtuals i polítiques de provisió cloud
+\parencite{calheiros2011cloudsim}. SimGrid se centra en aplicacions distribuïdes
+i ofereix abstraccions per experimentar amb algorismes de planificació. Els seus
+autors destaquen que els simuladors creats per a un sol estudi dificulten
+reproduir i comparar resultats \parencite{legrand2003simgrid}.
+
+Aquestes eines demostren el valor d'intercanviar polítiques sense reconstruir
+tot el model, però inclouen xarxes, recursos heterogenis, VM o aplicacions
+paral·leles. SimPy ofereix una alternativa general per construir simulacions de
+processos i recursos en Python \parencite{simpyTime}; proporciona mecanismes
+temporals, però cal construir el model, les polítiques, la persistència i la
+interfície.
+
+Com a antecedent universitari, SimuQ permet definir sistemes de cues des d'una
+interfície, executar-los amb SimPy i obtenir dades per comparar configuracions
+\parencite{caballero2016simuq}. És proper per la combinació de simulació i
+interacció gràfica, però representa punts de servei, no tasques backend, i és
+una aplicació d'escriptori.
+
+BullMQ i RabbitMQ pertanyen a la família operativa. BullMQ gestiona tasques i
+workers sobre Redis i permet FIFO, LIFO i prioritats
+\parencite{bullmqPrioritized}. RabbitMQ és un broker de missatges amb cues FIFO
+i prioritats subjectes al tipus de cua i a la configuració
+\parencite{rabbitmqPriority}. Cap dels dos està dissenyat per executar la mateixa
+càrrega sintètica amb diverses polítiques i presentar una comparació neutral.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Comparació resumida de solucions relacionades}
+  \label{tab:eines}
+  \begin{tabularx}{\textwidth}{@{}p{1.9cm}p{2.4cm}X X@{}}
+    \toprule
+    Proposta & Tipus & Aportació principal & Diferència respecte del TFM \\
+    \midrule
+    GridSim & Simulador & Recursos Grid i polítiques extensibles & Domini distribuït, terminis i costos \\
+    CloudSim & Simulador & Infraestructura cloud i provisió & Modela centres de dades, VM i xarxes \\
+    SimGrid & Marc & Planificació d'aplicacions distribuïdes & Orientació Grid/HPC i configuració tècnica \\
+    SimPy & Biblioteca & Processos, esdeveniments i recursos & Cal construir l'aplicació experimental completa \\
+    SimuQ & Eina acadèmica & Interfície per simular cues de servei & Escriptori i domini de punts de servei \\
+    BullMQ / RabbitMQ & Cua operativa & Execució real, workers i prioritats & No comparen polítiques sota entrades equivalents \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+La comparació no identifica un competidor directe. Mostra un espai entre els
+marcs de simulació potents però tècnics i les cues productives que executen una
+configuració concreta. Aquest espai permet situar una plataforma web acotada,
+orientada a preparar escenaris, repetir-los i interpretar els compromisos entre
+polítiques.

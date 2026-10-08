@@ -1,0 +1,23 @@
+\section{Conclusions}
+
+La planificació de tasques asíncrones distribueix una capacitat limitada. FIFO
+ofereix una línia base simple; la prioritat estricta pot accelerar treballs
+urgents però exposa les classes baixes a esperes extremes; i l'envelliment
+intenta moderar aquest risc a canvi d'alterar el servei de les prioritats
+inicials. La literatura no permet declarar una política universalment superior,
+perquè els resultats depenen de la càrrega, les durades, les classes i la
+mètrica observada.
+
+La simulació d'esdeveniments discrets permet comparar alternatives sense
+dependre del temps real ni d'una infraestructura productiva. Totes les
+polítiques han de rebre entrades equivalents, els experiments aleatoris han de
+conservar llavors i repeticions, i les mètriques s'han d'analitzar globalment i
+per classes. La verificació del motor, la delimitació de la validesa i la
+documentació dels experiments formen part de la contribució.
+
+Les eines existents cobreixen fragments del problema, però no s'ha identificat
+una solució directament equivalent a la plataforma proposada. Aquest resultat
+justifica un prototip propi de menor abast, amb polítiques intercanviables,
+escenaris sintètics persistits i una visualització orientada a interpretar els
+resultats. L'estat de l'art estableix així la base conceptual i metodològica per
+prendre les decisions de disseny i avaluar-les sense anticipar conclusions.

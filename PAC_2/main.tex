@@ -1,0 +1,34 @@
+\documentclass[11pt,a4paper]{article}
+
+\input{config/preamble}
+
+\addbibresource{bibliography/references.bib}
+
+\title{Estat de l'art}
+\author{Andrés Pisco Granda}
+\date{Curs 2026--2027}
+
+\begin{document}
+
+\pagenumbering{gobble}
+\input{sections/00-portada}
+
+\pagenumbering{roman}
+\thispagestyle{fancy}
+\tableofcontents
+\clearpage
+
+\pagenumbering{arabic}
+\input{sections/01-introduccio}
+\input{sections/02-processament-asincron}
+\input{sections/03-planificacio}
+\input{sections/04-metriques}
+\input{sections/05-simulacio}
+\input{sections/06-solucions-existents}
+\input{sections/07-posicionament}
+\input{sections/08-conclusions}
+
+\clearpage
+\printbibliography[title={Bibliografia}]
+
+\end{document}

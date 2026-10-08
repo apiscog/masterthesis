@@ -1,0 +1,78 @@
+\usepackage{fontspec}
+\setmainfont{Arial}
+
+\usepackage[catalan]{babel}
+\usepackage{csquotes}
+\DeclareQuoteAlias{spanish}{catalan}
+\usepackage{setspace}
+\onehalfspacing
+
+\usepackage[
+  a4paper,
+  left=3.5cm,
+  right=2cm,
+  top=1.2cm,
+  headsep=3mm,
+  headheight=2.3cm,
+  includehead,
+  footskip=15mm
+]{geometry}
+
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{xurl}
+\usepackage[hidelinks]{hyperref}
+
+% Identitat visual basada en la plantilla de tasques de la UOC.
+\definecolor{uocblue}{HTML}{000078}
+\definecolor{uoccyan}{HTML}{73EDFF}
+\definecolor{uocgray}{HTML}{F0F0F0}
+
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[L]{%
+  \hspace*{-2.5cm}%
+  \includegraphics[width=18cm]{assets/encabezado-uoc.png}%
+}
+\fancyfoot[R]{%
+  \footnotesize
+  \begin{tabular}{@{}l@{\ }l@{\ }l@{}}
+    \textcolor{uoccyan}{\rule{6.7cm}{0.9mm}} &
+    \textcolor{uoccyan}{\rule{5.7cm}{0.9mm}} &
+    \textcolor{uoccyan}{\rule{2.7cm}{0.9mm}} \\
+    Andr\'es Pisco Granda & Curs 2026--2027 & \textbf{p\`ag. \thepage}
+  \end{tabular}%
+}
+\pagestyle{fancy}
+
+\usepackage[
+  backend=biber,
+  style=numeric,
+  sorting=nyt,
+  sortcites=true,
+  giveninits=true
+]{biblatex}
+
+% Els ISBN llargs no aporten informació essencial a aquesta entrega i poden
+% provocar desbordaments amb Arial 11.
+\AtEveryBibitem{\clearfield{isbn}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+\setlength{\emergencystretch}{2em}
+
+\addto\captionscatalan{\renewcommand{\tablename}{Taula}}
+
+\usepackage[
+  font={small},
+  labelfont={bf,small},
+  justification=centerlast
+]{caption}
+
+\hypersetup{
+  pdftitle={Estat de l'art del TFM},
+  pdfauthor={Andrés Pisco Granda}
+}

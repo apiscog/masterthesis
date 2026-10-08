@@ -1,0 +1,34 @@
+\section{Criteris i mètriques d'avaluació}
+
+Una comparació útil necessita definir cada instant del cicle de vida. Si
+$a_i$ és l'arribada de la tasca $i$, $s_i$ l'inici i $c_i$ la finalització, el
+temps d'espera és $s_i-a_i$ i el temps total al sistema és $c_i-a_i$. La durada
+del servei és $c_i-s_i$ en el model sense interrupció. Aquesta definició evita
+usar indistintament espera, resposta i execució.
+
+La mitjana resumeix el comportament general, però és sensible a valors extrems
+i pot ocultar que una classe concreta queda perjudicada. Per aquest motiu convé
+afegir la mediana, el percentil 95 i el màxim del temps d'espera, així com el
+nombre de tasques que superen un llindar. Els resultats s'han de calcular també
+per prioritat o tipus. Aquesta desagregació connecta amb la literatura sobre
+equitat, que estudia com una política pot millorar una mesura global mentre
+reparteix de manera desigual el retard \parencite{wierman2011fairness}.
+
+El throughput és el nombre de tasques completades per unitat de temps simulat.
+La utilització d'un worker és la proporció del temps observat durant la qual es
+troba ocupat. Buzen relaciona throughput, resposta i utilització mitjançant
+lleis operacionals de rendiment informàtic \parencite{buzen1976laws}. Aquestes
+relacions són útils com a comprovacions de coherència, però no expliquen per si
+soles les diferències entre classes.
+
+La longitud de la cua al llarg del temps ajuda a interpretar pics i períodes de
+saturació. Un únic valor final no permet distingir una acumulació breu d'una
+cua que creix de manera persistent. En escenaris finits també es pot mesurar el
+makespan, el temps fins que finalitza l'última tasca. Dues polítiques poden tenir
+un makespan semblant i distribuir l'espera de manera molt diferent.
+
+La selecció mínima proposada inclou mitjana, mediana, percentil 95 i màxim
+d'espera; temps total al sistema; tasques completades; throughput; utilització;
+longitud de cua; i resultats per prioritat. Si s'incorporen fallades, s'afegiran
+intents i reintents. Les mètriques addicionals només entraran si responen una
+pregunta concreta, perquè massa indicadors poden dificultar la interpretació.
