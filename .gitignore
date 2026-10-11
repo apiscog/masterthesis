@@ -6,6 +6,7 @@
 # Archivos basicos del repositorio.
 !/.gitignore
 !/README.md
+!/Guia_decisions_disseny_implementacio.md
 
 # Configuracion compartida de compilacion en VS Code.
 !/.vscode/
