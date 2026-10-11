@@ -1,43 +1,54 @@
 \section{Solucions i eines existents}
 
-Les solucions més properes al TFM no formen una única categoria. Les cues
-operatives resolen l'execució de treball backend; les biblioteques de simulació
-aporten primitives temporals; i algunes eines visuals faciliten definir cues o
-workflows. La comparació s'ha de fer segons la seva relació amb la plataforma
-prevista, no segons la quantitat de funcionalitats que ofereixen.
+Les solucions més properes al TFM no formen una única categoria. D'una banda,
+les cues operatives resolen l'execució de treball backend. D'altra banda, les
+biblioteques de simulació aporten mecanismes per representar el temps i els
+esdeveniments. Finalment, algunes eines visuals faciliten la definició de cues o
+workflows, també anomenats fluxos de treball. Per tant, la comparació s'ha de
+fer segons la relació de cada eina amb la plataforma prevista i no segons la
+quantitat de funcionalitats que ofereix.
 
-BullMQ gestiona tasques i workers sobre Redis i admet FIFO, LIFO i prioritats
-\parencite{bullmqPrioritized}. RabbitMQ és un broker de missatges amb cues FIFO
-i cues amb prioritat subjectes al tipus de cua i a la configuració
-\parencite{rabbitmqPriority}. Ambdues són referències directes del domini
-backend, però executen treball real sota una configuració concreta. No estan
-orientades a repetir una mateixa càrrega amb diverses polítiques i presentar-ne
-una comparació experimental neutral.
+BullMQ és una biblioteca de cues per a Node.js. Per coordinar les tasques i els
+workers utilitza Redis, un sistema que conserva dades en memòria i hi permet
+accedir ràpidament. BullMQ admet FIFO, LIFO, que processa primer l'última tasca
+que ha arribat, i cues amb prioritats \parencite{bullmqPrioritized}. Per la seva
+banda, RabbitMQ és un broker de missatges, és a dir, un intermediari que rep,
+conserva i distribueix missatges entre aplicacions. Ofereix cues FIFO i cues amb
+prioritat, amb un comportament que depèn del tipus de cua i de la configuració
+\parencite{rabbitmqPriority}. Ambdues eines són referències directes del domini
+backend, però executen treball real sota una configuració concreta. En canvi,
+no estan orientades a repetir una mateixa càrrega amb diverses polítiques ni a
+presentar-ne una comparació experimental neutral.
 
-SimPy proporciona processos, esdeveniments i recursos per construir
-simulacions en Python \parencite{simpyTime}. És una referència útil per entendre
-el rellotge virtual, però no ofereix per si sola la gestió d'escenaris, les
-polítiques del TFM, la persistència ni la interfície web. SimuQ és un antecedent
-més proper perquè combina una interfície amb la simulació de sistemes de cues
-mitjançant SimPy \parencite{caballero2016simuq}; tanmateix, representa punts de
+SimPy és una biblioteca de Python, un llenguatge de programació d'ús general,
+orientada a la simulació d'esdeveniments discrets. Proporciona processos,
+esdeveniments i recursos per construir models amb un rellotge virtual
+\parencite{simpyTime}. Per si sola, però, no ofereix la gestió d'escenaris, les
+polítiques del TFM, la persistència ni la interfície web.
+SimuQ és una eina educativa per configurar i simular sistemes de cues. Es tracta
+d'un antecedent més proper, ja que combina una interfície amb la simulació
+mitjançant SimPy \parencite{caballero2016simuq}. Tanmateix, representa punts de
 servei i es presenta com una aplicació d'escriptori, no com una plataforma web
 per analitzar tasques backend.
 
-n8n permet definir i executar workflows mitjançant una interfície visual. En
-mode cua, una instància principal registra les execucions i workers independents
-les processen mitjançant Redis \parencite{n8nQueueMode}. Aquesta arquitectura
-és rellevant com a exemple de plataforma web d'automatització, però la seva cua
-gestiona execucions reals. El node d'espera suspèn un workflow durant un interval
-real o fins que es compleix una condició \parencite{n8nWait}; no proporciona el
-rellotge virtual ni la comparació de FIFO, prioritat estricta i envelliment que
-requereix el TFM. Implementar tota aquesta lògica en un node de codi convertiria
-n8n en un contenidor del motor, no en el motor mateix.
+n8n és una plataforma d'automatització que permet definir i executar fluxos de
+treball mitjançant una interfície visual. En el mode cua, una instància
+principal registra les execucions i uns workers independents les processen
+mitjançant Redis \parencite{n8nQueueMode}. Aquesta arquitectura és rellevant com
+a exemple de plataforma web d'automatització. Malgrat això, la seva cua gestiona
+execucions reals. El node d'espera, un component que pausa una part del flux,
+suspèn l'execució durant un interval real o fins que es compleix una condició
+\parencite{n8nWait}. En conseqüència, no proporciona el rellotge virtual ni la
+comparació entre FIFO, prioritat estricta i envelliment que requereix el TFM.
+Implementar tota aquesta lògica en un node de codi convertiria n8n en un
+contenidor del motor, però no en el motor mateix.
 
-Els simuladors acadèmics de Grid, cloud o computació distribuïda constitueixen
-antecedents metodològics, però no són alternatives directes al producte. El TFM
-no pretén reproduir els seus models d'infraestructura, sinó aplicar un model
-acotat dins d'una experiència web orientada a configurar i interpretar
-comparacions de polítiques.
+Els simuladors acadèmics de Grid, cloud o computació distribuïda representen
+infraestructures formades per múltiples recursos de processament. Constitueixen
+antecedents metodològics, encara que no són alternatives directes a la
+plataforma proposada. El TFM no pretén reproduir els seus models
+d'infraestructura, sinó aplicar un model acotat dins d'una experiència web
+orientada a configurar i interpretar comparacions de polítiques.
 
 \begin{table}[htbp]
   \centering
@@ -47,7 +58,7 @@ comparacions de polítiques.
     \toprule
     Proposta & Orientació & Capacitat relacionada & Diferència respecte del TFM \\
     \midrule
-    BullMQ & Cua backend & Tasques, workers, FIFO i prioritats & Execució real; no compara polítiques amb temps virtual \\
+    BullMQ & Cua backend & Tasques, workers, FIFO i prioritats & Execució real sense comparació de polítiques amb temps virtual \\
     RabbitMQ & Broker & Missatgeria, consumidors i cues prioritàries & No és una plataforma experimental de planificació \\
     SimPy & Biblioteca & Esdeveniments, processos i recursos & Cal construir el motor específic, l'API i la interfície \\
     SimuQ & Eina visual & Configuració i simulació de cues de servei & Escriptori i domini de punts de servei \\
@@ -56,6 +67,6 @@ comparacions de polítiques.
   \end{tabularx}
 \end{table}
 
-La revisió no identifica una eina que integri el domini de les tasques backend,
-un motor temporal controlat, polítiques intercanviables i una comparació web de
-resultats. Aquest espai és el que delimita la plataforma proposada.
+En síntesi, la revisió no identifica una eina que integri el domini de les
+tasques backend, un motor temporal controlat, polítiques intercanviables i una
+comparació web de resultats. Aquest espai delimita la plataforma proposada.

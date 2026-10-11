@@ -1,35 +1,40 @@
 \section{Síntesi i posicionament del TFM}
 
-La contribució prevista és una plataforma web, no un simulador acadèmic de
-propòsit general. L'usuari podrà definir una càrrega sintètica, seleccionar les
-polítiques que vol comparar, iniciar les execucions i interpretar les mètriques
-des d'una mateixa interfície. La simulació és el mecanisme intern que permet que
-aquestes comparacions siguin ràpides, controlades i reproduïbles.
+La contribució prevista és una plataforma web i no un simulador acadèmic de
+propòsit general. Des d'una mateixa interfície, l'usuari podrà definir una
+càrrega sintètica, seleccionar les polítiques que vol comparar, iniciar les
+execucions i interpretar les mètriques. En aquest context, la simulació serà el
+mecanisme intern que permetrà fer comparacions ràpides, controlades i
+reproduïbles.
 
-El backend es preveu implementar amb Node.js i TypeScript. Dins seu es
-desenvoluparà un motor propi que representarà tasques asíncrones no preemptives,
-workers limitats i un rellotge virtual. Les polítiques s'implementaran darrere
-d'una interfície comuna per aplicar FIFO, prioritat estricta i prioritat amb
-envelliment sobre la mateixa entrada. Aquesta lògica es mantindrà separada de
-l'API, la persistència i la interfície d'usuari per poder-la verificar amb
-proves unitàries.
+El backend es preveu implementar amb Node.js, un entorn per executar JavaScript
+fora del navegador, i TypeScript, un llenguatge que amplia JavaScript amb tipus
+estàtics. Com a part d'aquest backend, es desenvoluparà un motor propi que
+representarà tasques asíncrones no preemptives, un nombre limitat de workers i
+un rellotge virtual. Alhora, les polítiques compartiran una interfície comuna
+per poder aplicar FIFO, prioritat estricta i prioritat amb envelliment sobre la
+mateixa entrada. Aquesta lògica es mantindrà separada de l'API, la persistència
+i la interfície d'usuari perquè es pugui verificar mitjançant proves unitàries.
 
-La resta de la plataforma completarà el flux d'ús. L'API permetrà crear
-escenaris, iniciar comparacions i consultar resultats; la persistència
-conservarà les dades necessàries per repetir-los; i el frontend presentarà les
-mètriques sense exigir que l'usuari inspeccioni logs o taules internes. Aquesta
-integració entre aplicació web i experimentació constitueix una part essencial
-del treball, no una capa decorativa sobre el motor.
+La resta de la plataforma completarà el flux d'ús. L'API establirà les
+operacions amb què la interfície web es comunicarà amb el backend i permetrà
+crear escenaris, iniciar comparacions i consultar-ne els resultats. La
+persistència conservarà les dades necessàries per repetir els experiments.
+Finalment, el frontend, que és la part visible amb què interactua l'usuari,
+presentarà les mètriques sense exigir la consulta dels registres tècnics o
+\emph{logs} ni de les taules internes. Per tant, la integració entre l'aplicació
+web i l'experimentació constituirà una part essencial del treball i no una
+simple capa visual sobre el motor.
 
-No es modelaran topologies de xarxa, màquines virtuals ni negociació de
-recursos, ni es reproduiran totes les garanties d'un broker o d'una plataforma
-de workflows. Eines com n8n, BullMQ o RabbitMQ poden servir com a contrast o
-com a integració futura, però no substituiran el motor propi. L'objectiu és fer
-visible la relació entre càrrega, política i espera amb un model comprensible i
-verificable.
+Pel que fa als límits, no es modelaran topologies de xarxa, màquines virtuals ni
+negociació de recursos. Tampoc es reproduiran totes les garanties d'un broker o
+d'una plataforma de workflows. Eines com n8n, BullMQ o RabbitMQ podran servir
+com a contrast o com a integració futura, però no substituiran el motor propi.
+L'objectiu és fer visible la relació entre la càrrega, la política i l'espera
+mitjançant un model comprensible i verificable.
 
 La plataforma s'adreça principalment a estudiants i professionals de backend
-que vulguin explorar una decisió abans d'aplicar-la a un sistema real. Una
-comparació amb dades sintètiques pot revelar comportaments i riscos dins del
-model, però no pot garantir l'efecte d'una política sobre una organització sense
-calibrar-la amb dades representatives.
+que vulguin explorar una decisió abans d'aplicar-la a un sistema real. Encara
+que una comparació amb dades sintètiques pot revelar comportaments i riscos
+dins del model, no pot garantir l'efecte d'una política sobre una organització
+sense calibrar-la prèviament amb dades representatives.

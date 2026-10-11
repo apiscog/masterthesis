@@ -1,44 +1,53 @@
 \section{Motor experimental i reproduïbilitat}
 
-La plataforma necessita un mecanisme per representar l'arribada, l'inici i la
+La plataforma necessita un mecanisme que representi l'arribada, l'inici i la
 finalització de les tasques sense esperar que transcorri el temps real. La
-simulació d'esdeveniments discrets resol aquest requisit mitjançant canvis
-d'estat en instants concrets: entre dos esdeveniments consecutius, el rellotge
-virtual pot avançar directament fins al següent instant rellevant
+simulació d'esdeveniments discrets ho resol mitjançant canvis d'estat en
+instants concrets. Entre dos esdeveniments consecutius, el rellotge virtual pot
+avançar directament fins al següent instant rellevant
 \parencite{banks2010des,simpyTime}. Així, una durada simulada de deu minuts no
 obliga a mantenir l'experiment actiu durant deu minuts reals.
 
-Aquest motor no constitueix tota la plataforma, sinó un mòdul del backend. La
-interfície web recollirà la configuració de l'escenari i mostrarà els resultats;
-l'API gestionarà les execucions i la persistència; i el motor aplicarà les
-polítiques sobre una representació simplificada de tasques, cues i workers. La
-separació permet provar la lògica de planificació sense acoblar-la a la
-interfície ni a la infraestructura d'una cua productiva.
+Aquest motor no constituirà tota la plataforma, sinó que serà un mòdul del
+backend, la part de l'aplicació que conté la lògica i processa les dades. La
+interfície web recollirà la configuració de l'escenari i mostrarà els resultats.
+Alhora, l'API, que defineix com es comuniquen els components de l'aplicació,
+gestionarà les execucions i la persistència de la informació. Mentrestant, el
+motor aplicarà les polítiques sobre una representació simplificada de tasques,
+cues i workers. Aquesta separació permetrà provar la lògica de planificació
+sense acoblar-la a la interfície ni a la infraestructura d'una cua en producció.
 
-La comparació requereix que cada política rebi la mateixa llista de tasques,
-amb les mateixes arribades, durades, prioritats i recursos. Quan les entrades
-són aleatòries, s'ha de conservar la llavor i repetir els experiments. Law
-recomana comparar configuracions sota condicions experimentals semblants perquè
-les diferències es puguin atribuir a les alternatives i no a la variació de les
-entrades \parencite{law2015simulation}.
+Perquè la comparació sigui vàlida, cada política ha de rebre la mateixa llista
+de tasques, amb les mateixes arribades, durades, prioritats i recursos. Quan les
+entrades siguin aleatòries, també caldrà conservar la llavor, el valor inicial
+que permet tornar a generar la mateixa seqüència de dades, i repetir els
+experiments. Law recomana comparar les configuracions sota condicions
+experimentals semblants. D'aquesta manera, les diferències es poden atribuir a
+les alternatives i no a la variació de les entrades
+\parencite{law2015simulation}.
 
-GridSim i CloudSim mostren l'ús de la simulació per estudiar algorismes i
-polítiques sense desplegar tota la infraestructura objecte de l'estudi
+GridSim i CloudSim són eines acadèmiques creades per simular recursos i serveis
+de computació distribuïda. Mostren com es poden estudiar algorismes i polítiques
+sense desplegar tota la infraestructura objecte de l'estudi
 \parencite{buyya2002gridsim,calheiros2011cloudsim}. El seu domini és més ampli
-que el del TFM, però el principi transferible és la separació entre el sistema
-real i el model experimental. En aquest treball no es representaran xarxes,
-màquines virtuals ni centres de dades.
+que el del TFM. Tanmateix, aporten un principi aplicable a aquest treball:
+separar el sistema real del model experimental. En conseqüència, el model
+proposat no representarà xarxes, màquines virtuals ni centres de dades.
 
-Cal distingir verificació i validació. La verificació comprova que el programa
-implementa correctament el model; la validació valora si el model és adequat
-per al propòsit declarat \parencite{sargent2007verification}. Per verificar el
-motor es poden preparar casos petits amb resultats calculables, revisar traces
-i comprovar invariants: cap tasca no pot començar abans d'arribar i un worker no
-pot executar dues tasques alhora. Les dades sintètiques permetran explorar
-comportaments, però no garantiran una millora en producció.
+També cal diferenciar la verificació de la validació. La verificació comprova si
+el programa implementa correctament el model. En canvi, la validació valora si
+aquest model és adequat per al propòsit declarat
+\parencite{sargent2007verification}. Per verificar el motor es podran preparar
+casos petits amb resultats calculables i revisar les traces, que registren els
+esdeveniments produïts durant una execució. També es comprovaran invariants, és
+a dir, condicions que sempre s'han de complir. Per exemple, cap tasca no podrà
+començar abans d'arribar i un worker no podrà executar dues tasques alhora. Les
+dades sintètiques permetran explorar comportaments dins del model, però no
+garantiran una millora en un entorn de producció.
 
-Les directrius STRESS organitzen la descripció dels estudis de simulació en
-objectius, lògica, dades, experimentació, implementació i accés al codi
-\parencite{monks2019stress}. Per facilitar la reproducció, cada execució haurà
-de conservar l'escenari, la política, els paràmetres, la llavor, la versió del
-model i les mètriques obtingudes.
+Finalment, STRESS és un conjunt de directrius per descriure estudis de simulació
+amb prou transparència. Organitza la informació en objectius, lògica, dades,
+experimentació, implementació i accés al codi \parencite{monks2019stress}. En
+relació amb aquestes directrius, cada execució haurà de conservar l'escenari,
+la política, els paràmetres, la llavor, la versió del model i les mètriques
+obtingudes. Això facilitarà que els experiments es puguin reproduir i revisar.

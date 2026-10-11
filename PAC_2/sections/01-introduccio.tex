@@ -1,35 +1,44 @@
 \section{Introducció i delimitació}
 
-Les aplicacions web executen sovint operacions que no cal completar dins del
-cicle immediat d'una petició. La generació d'un document, l'enviament d'una
+Les aplicacions web executen sovint operacions que no cal completar durant la
+petició de l'usuari. Per exemple, la generació d'un document, l'enviament d'una
 comunicació, l'actualització d'un índex o el càlcul d'un informe es poden
-representar com a tasques en segon pla. Aquest desacoblament evita mantenir
-l'usuari esperant, però introdueix un sistema format per productors, cues i
-processos de treball que comparteixen una capacitat limitada. Quan s'acumulen
-tasques, la política de planificació condiciona qui espera, durant quant temps i
-amb quin aprofitament dels recursos.
+traslladar a segon pla. D'aquesta manera, l'usuari no ha d'esperar que aquestes
+operacions acabin per continuar utilitzant l'aplicació. Tanmateix, aquest
+desacoblament introdueix un sistema format per productors, cues i processos de
+treball que comparteixen una capacitat limitada. Per tant, quan les tasques
+s'acumulen, cal decidir quines s'executen primer, quant de temps esperen i com
+s'aprofiten els recursos disponibles.
 
-Aquest estat de l'art estudia els conceptes necessaris per dissenyar una
-plataforma web que permeti representar aquest problema amb dades sintètiques.
-La revisió se centra en quatre qüestions: les polítiques que decideixen quina
-tasca s'executa, les mètriques que permeten comparar-les, el mecanisme
-experimental necessari per obtenir resultats reproduïbles i les eines existents
-que resolen problemes relacionats. L'objectiu no és demostrar que una política
-sigui superior, sinó delimitar com es pot avaluar sota diferents condicions de
-càrrega.
+Aquest estat de l'art revisa els conceptes necessaris per dissenyar una
+plataforma web que representi aquest problema amb dades sintètiques. En concret,
+s'analitzen les polítiques que decideixen quina tasca s'executa, les mètriques
+que permeten comparar-les, el mecanisme experimental necessari per obtenir
+resultats reproduïbles i les eines que resolen problemes relacionats. L'objectiu
+no és demostrar que una política sigui superior a les altres, sinó establir com
+es poden avaluar sota diferents condicions de càrrega.
 
-La literatura sobre planificació inclou processadors, xarxes, fabricació,
-computació d'altes prestacions i infraestructures cloud. Aquests dominis no són
-equivalents a una cua de tasques backend. Per això només es recullen resultats
-externs quan aporten un concepte transferible, com la inanició, l'equitat,
-l'envelliment o el disseny d'experiments. Queden fora els planificadors de temps
-real amb garanties estrictes, els workflows amb dependències complexes i la
-selecció automàtica de polítiques mitjançant aprenentatge automàtic.
+La literatura sobre planificació inclou àmbits com els processadors, les xarxes,
+la fabricació, la computació d'altes prestacions i les infraestructures cloud,
+que proporcionen recursos informàtics a través de la xarxa. Ara bé, aquests
+dominis no són equivalents a una cua de tasques backend, és a dir, a la part
+interna d'una aplicació que executa la lògica i gestiona les dades. Per aquest
+motiu, només es recullen resultats externs quan aporten un concepte que es pot
+traslladar al TFM, com ara la inanició, l'equitat, l'envelliment o el disseny
+d'experiments. En canvi, queden fora els planificadors de temps real amb
+garanties estrictes, els workflows o fluxos de treball amb dependències
+complexes i la selecció automàtica de polítiques mitjançant aprenentatge
+automàtic.
 
-També cal separar les cues operatives dels entorns experimentals. BullMQ o
-RabbitMQ executen treball real i incorporen restriccions de persistència,
-consum, relliurament i concurrència. En el TFM, en canvi, la simulació serà un
-mecanisme intern per comparar polítiques sense esperar el temps real. El
-resultat principal serà una plataforma web per definir escenaris, iniciar
-comparacions i interpretar-ne les mètriques. El motor donarà suport a aquest
-flux, però no substituirà el disseny i el desenvolupament de l'aplicació web.
+Finalment, cal diferenciar les cues operatives dels entorns experimentals.
+BullMQ és una biblioteca de cues per a Node.js, un entorn utilitzat per
+desenvolupar aplicacions de servidor. Per la seva banda, RabbitMQ és un sistema
+intermediari que distribueix missatges entre aplicacions. Totes dues eines
+executen treball real i han de gestionar aspectes com la
+persistència, el consum, el relliurament i la concurrència. En aquest treball de
+fi de màster, en canvi, la simulació serà un mecanisme intern per comparar
+polítiques sense haver d'esperar que transcorri el temps real. El resultat
+principal serà una plataforma web des de la qual es podran definir escenaris,
+iniciar comparacions i interpretar-ne les mètriques. El motor de simulació
+donarà suport a aquest flux, però no substituirà el disseny ni el desenvolupament
+de l'aplicació web.
